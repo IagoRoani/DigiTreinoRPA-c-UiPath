@@ -1,0 +1,6 @@
+﻿ID Cliente,Fatura,Valor,Pago,Moeda,Data,ID,Nome,País,Cidade,Email
+002,0189465,"3000,00",N,BRL,//,002,Roberto Miguel,Brasil,Rio de Janeiro,roberto.miguel@desafiosrpa.com.br
+004,0125785,"1000,00",N,BRL,//,004,Marcelo Xavier,Brasil,Rio de Janeiro,marcelo.xavier@desafiosrpa.com.br
+009,0125466,"5000,00",N,BRL,//,009,João Santos,Brasil,Rio de Janeiro,joao.santos@desafiosrpa.com.br
+011,0125765,"15000,00",N,BRL,//,011,Sueli Santos,Brasil,Rio de Janeiro,Sueli.santos@desafiosrpa.com.br
+016,0125485,"5000,00",N,BRL,//,016,Fernanda Paula,Brasil,Rio de Janeiro,fernanda.paula@desafiosrpa.com.br

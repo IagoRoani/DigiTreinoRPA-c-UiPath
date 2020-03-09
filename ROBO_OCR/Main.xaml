@@ -1,6 +1,6 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Main" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="866,2068" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Diagnostics;assembly=System" xmlns:sd1="clr-namespace:System.Drawing;assembly=System.Drawing" xmlns:sd2="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Main" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="1731,2912" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Drawing;assembly=System.Drawing" xmlns:sd1="clr-namespace:System.Diagnostics;assembly=System" xmlns:sd2="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <TextExpression.NamespacesForImplementation>
-    <scg:List x:TypeArguments="x:String" Capacity="24">
+    <scg:List x:TypeArguments="x:String" Capacity="48">
       <x:String>System.Activities</x:String>
       <x:String>System.Activities.Statements</x:String>
       <x:String>System.Activities.Expressions</x:String>
@@ -25,6 +25,7 @@
       <x:String>System.Xml.Serialization</x:String>
       <x:String>UiPath.Excel</x:String>
       <x:String>UiPath.Vision.OCR</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -50,18 +51,23 @@
       <AssemblyReference>System.ServiceModel</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="OCR_Extrair_Dados" sap:VirtualizedContainerService.HintSize="846,1968" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="OCR_Extrair_Dados" sap:VirtualizedContainerService.HintSize="1711,2812" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="s:Object[]" Name="pegarArquivos" />
       <Variable x:TypeArguments="x:String" Name="pastaID" />
+      <Variable x:TypeArguments="x:String" Name="identificacao" />
+      <Variable x:TypeArguments="x:String" Name="nomeCompleto" />
+      <Variable x:TypeArguments="x:String" Name="numeroID" />
+      <Variable x:TypeArguments="x:String" Name="dataNascimento" />
+      <Variable x:TypeArguments="sd2:DataTable" Name="datatable" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:SelectFolder DisplayName="Select Folder" sap:VirtualizedContainerService.HintSize="804,22" sap2010:WorkflowViewState.IdRef="SelectFolder_1" SelectedFolder="[pastaID]" />
-    <Assign sap:VirtualizedContainerService.HintSize="804,60" sap2010:WorkflowViewState.IdRef="Assign_1">
+    <ui:SelectFolder DisplayName="Select Folder" sap:VirtualizedContainerService.HintSize="1669,22" sap2010:WorkflowViewState.IdRef="SelectFolder_1" SelectedFolder="[pastaID]" />
+    <Assign sap:VirtualizedContainerService.HintSize="1669,60" sap2010:WorkflowViewState.IdRef="Assign_1">
       <Assign.To>
         <OutArgument x:TypeArguments="s:Object[]">[pegarArquivos]</OutArgument>
       </Assign.To>
@@ -69,35 +75,75 @@
         <InArgument x:TypeArguments="s:Object[]">[Directory.GetFiles(pastaID)]</InArgument>
       </Assign.Value>
     </Assign>
-    <ui:ForEach x:TypeArguments="x:Object" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="804,1714" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[pegarArquivos]">
+    <ui:ForEach x:TypeArguments="x:Object" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="1669,2558" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[pegarArquivos]">
       <ui:ForEach.Body>
         <ActivityAction x:TypeArguments="x:Object">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="x:Object" Name="pegarImagens" />
           </ActivityAction.Argument>
-          <Sequence DisplayName="Corpo" sap:VirtualizedContainerService.HintSize="768,1580" sap2010:WorkflowViewState.IdRef="Sequence_3">
+          <Sequence DisplayName="Corpo" sap:VirtualizedContainerService.HintSize="1633,2423" sap2010:WorkflowViewState.IdRef="Sequence_3">
             <Sequence.Variables>
-              <Variable x:TypeArguments="ui:GenericValue" Name="numeroID" />
-              <Variable x:TypeArguments="ui:GenericValue" Name="nomeCompleto" />
-              <Variable x:TypeArguments="ui:GenericValue" Name="dataNascimento" />
-              <Variable x:TypeArguments="sd2:DataTable" Name="datatable" />
-              <Variable x:TypeArguments="sd:Process" Name="process" />
+              <Variable x:TypeArguments="sd1:Process" Name="process" />
             </Sequence.Variables>
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="726,61" sap2010:WorkflowViewState.IdRef="WriteLine_1" Text="[pegarImagens.ToString]" />
-            <Assign sap:VirtualizedContainerService.HintSize="726,60" sap2010:WorkflowViewState.IdRef="Assign_2">
-              <Assign.To>
-                <OutArgument x:TypeArguments="sd:Process">[process]</OutArgument>
-              </Assign.To>
-              <Assign.Value>
-                <InArgument x:TypeArguments="sd:Process">[Process.Start(pegarImagens.ToString)]</InArgument>
-              </Assign.Value>
-            </Assign>
-            <ui:AnchorBase AnchorPosition="Auto" DisplayName="Anchor Base" sap:VirtualizedContainerService.HintSize="726,260" sap2010:WorkflowViewState.IdRef="AnchorBase_1">
+            <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="1591,62" sap2010:WorkflowViewState.IdRef="WriteLine_1" Text="[pegarImagens.ToString]" />
+            <ui:AnchorBase AnchorPosition="Auto" DisplayName="Anchor Base" sap:VirtualizedContainerService.HintSize="1591,260" sap2010:WorkflowViewState.IdRef="AnchorBase_8">
+              <ui:AnchorBase.Action>
+                <ActivityAction x:TypeArguments="ui:Anchor">
+                  <ActivityAction.Argument>
+                    <DelegateInArgument x:TypeArguments="ui:Anchor" Name="ContextAnchor" />
+                  </ActivityAction.Argument>
+                  <ui:GetOCRText WordsInfo="{x:Null}" ContinueOnError="False" DisplayName="Get OCR Text 'texto  ID01.png'" sap:VirtualizedContainerService.HintSize="334,168" sap2010:WorkflowViewState.IdRef="GetOCRText_8">
+                    <ui:GetOCRText.OCREngine>
+                      <ActivityFunc x:TypeArguments="sd:Image, scg:IEnumerable(scg:KeyValuePair(sd:Rectangle, x:String))">
+                        <ActivityFunc.Argument>
+                          <DelegateInArgument x:TypeArguments="sd:Image" Name="Image" />
+                        </ActivityFunc.Argument>
+                        <ui:GoogleOCR AllowedCharacters="{x:Null}" DeniedCharacters="{x:Null}" FilterRegion="{x:Null}" Invert="{x:Null}" Language="{x:Null}" Output="{x:Null}" Profile="{x:Null}" Scale="{x:Null}" Text="{x:Null}" ComputeSkewAngle="False" DisplayName="Tesseract OCR" ExtractWords="False" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="GoogleOCR_8" Image="[Image]" />
+                      </ActivityFunc>
+                    </ui:GetOCRText.OCREngine>
+                    <ui:GetOCRText.Target>
+                      <ui:Target Element="{x:Null}" InformativeScreenshot="40072c7633a94df29d6e8f04f1b0b3f1" Selector="&lt;uia cls='Photos.Viewer.Controls.AccessibleContentControl' /&gt;">
+                        <ui:Target.ClippingRegion>
+                          <ui:Region Rectangle="613, 195, 176, 78" />
+                        </ui:Target.ClippingRegion>
+                        <ui:Target.TimeoutMS>
+                          <InArgument x:TypeArguments="x:Int32" />
+                        </ui:Target.TimeoutMS>
+                        <ui:Target.WaitForReady>
+                          <InArgument x:TypeArguments="ui:WaitForReady" />
+                        </ui:Target.WaitForReady>
+                      </ui:Target>
+                    </ui:GetOCRText.Target>
+                    <ui:GetOCRText.Text>
+                      <OutArgument x:TypeArguments="x:String">[identificacao]</OutArgument>
+                    </ui:GetOCRText.Text>
+                  </ui:GetOCRText>
+                </ActivityAction>
+              </ui:AnchorBase.Action>
+              <ui:AnchorBase.AnchorProvider>
+                <ui:WaitUiElementAppear FoundElement="{x:Null}" WaitActive="{x:Null}" WaitVisible="{x:Null}" DisplayName="Find Element 'texto  ID01.png'" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="WaitUiElementAppear_8">
+                  <ui:WaitUiElementAppear.Target>
+                    <ui:Target Element="{x:Null}" InformativeScreenshot="8d6f5d8f8404cef86c03e4d00b801be3" Selector="&lt;wnd app='applicationframehost.exe' appid='Microsoft.Windows.Photos_8wekyb3d8bbwe!App' title='Fotos' /&gt;&lt;uia automationid='AutomationBackgroundControl' cls='Photos.Viewer.Controls.AccessibleContentControl' name='ID01.png' /&gt;">
+                      <ui:Target.ClippingRegion>
+                        <ui:Region Rectangle="349, 204, 273, 60" />
+                      </ui:Target.ClippingRegion>
+                      <ui:Target.TimeoutMS>
+                        <InArgument x:TypeArguments="x:Int32" />
+                      </ui:Target.TimeoutMS>
+                      <ui:Target.WaitForReady>
+                        <InArgument x:TypeArguments="ui:WaitForReady" />
+                      </ui:Target.WaitForReady>
+                    </ui:Target>
+                  </ui:WaitUiElementAppear.Target>
+                </ui:WaitUiElementAppear>
+              </ui:AnchorBase.AnchorProvider>
+            </ui:AnchorBase>
+            <ui:AnchorBase AnchorPosition="Auto" DisplayName="Anchor Base" sap:VirtualizedContainerService.HintSize="1591,260" sap2010:WorkflowViewState.IdRef="AnchorBase_1">
               <ui:AnchorBase.Action>
                 <ActivityAction x:TypeArguments="ui:Anchor">
                   <ActivityAction.Argument>
@@ -105,9 +151,9 @@
                   </ActivityAction.Argument>
                   <ui:GetOCRText WordsInfo="{x:Null}" DisplayName="Get OCR Text 'texto  ID01.png'" sap:VirtualizedContainerService.HintSize="334,168" sap2010:WorkflowViewState.IdRef="GetOCRText_1">
                     <ui:GetOCRText.OCREngine>
-                      <ActivityFunc x:TypeArguments="sd1:Image, scg:IEnumerable(scg:KeyValuePair(sd1:Rectangle, x:String))">
+                      <ActivityFunc x:TypeArguments="sd:Image, scg:IEnumerable(scg:KeyValuePair(sd:Rectangle, x:String))">
                         <ActivityFunc.Argument>
-                          <DelegateInArgument x:TypeArguments="sd1:Image" Name="Image" />
+                          <DelegateInArgument x:TypeArguments="sd:Image" Name="Image" />
                         </ActivityFunc.Argument>
                         <ui:GoogleOCR AllowedCharacters="{x:Null}" DeniedCharacters="{x:Null}" FilterRegion="{x:Null}" Invert="{x:Null}" Language="{x:Null}" Output="{x:Null}" Profile="{x:Null}" Scale="{x:Null}" Text="{x:Null}" ComputeSkewAngle="False" DisplayName="Tesseract OCR" ExtractWords="False" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="GoogleOCR_1" Image="[Image]" />
                       </ActivityFunc>
@@ -126,7 +172,7 @@
                       </ui:Target>
                     </ui:GetOCRText.Target>
                     <ui:GetOCRText.Text>
-                      <OutArgument x:TypeArguments="ui:GenericValue">[numeroID]</OutArgument>
+                      <OutArgument x:TypeArguments="x:String">[numeroID]</OutArgument>
                     </ui:GetOCRText.Text>
                   </ui:GetOCRText>
                 </ActivityAction>
@@ -134,7 +180,7 @@
               <ui:AnchorBase.AnchorProvider>
                 <ui:WaitUiElementAppear FoundElement="{x:Null}" WaitActive="{x:Null}" WaitVisible="{x:Null}" DisplayName="Find Element 'push button'" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="WaitUiElementAppear_1">
                   <ui:WaitUiElementAppear.Target>
-                    <ui:Target Element="{x:Null}" InformativeScreenshot="e7837c3d763342ad2f9a37baeba75e60" Selector="&lt;wnd app='applicationframehost.exe' appid='Microsoft.Windows.Photos_8wekyb3d8bbwe!App' title='Fotos' /&gt;&lt;uia automationid='AutomationBackgroundControl' cls='Photos.Viewer.Controls.AccessibleContentControl' name='*' /&gt;">
+                    <ui:Target Element="{x:Null}" InformativeScreenshot="e7837c3d763342ad2f9a37baeba75e60" Selector="&lt;wnd app='applicationframehost.exe' appid='Microsoft.Windows.Photos_8wekyb3d8bbwe!App' title='Fotos' /&gt;&lt;uia automationid='AutomationBackgroundControl' cls='Photos.Viewer.Controls.AccessibleContentControl' name='ID*.png' /&gt;">
                       <ui:Target.ClippingRegion>
                         <ui:Region Rectangle="482, 375, 54, 44" />
                       </ui:Target.ClippingRegion>
@@ -149,7 +195,7 @@
                 </ui:WaitUiElementAppear>
               </ui:AnchorBase.AnchorProvider>
             </ui:AnchorBase>
-            <ui:AnchorBase AnchorPosition="Auto" DisplayName="Anchor Base" sap:VirtualizedContainerService.HintSize="726,260" sap2010:WorkflowViewState.IdRef="AnchorBase_2">
+            <ui:AnchorBase AnchorPosition="Auto" DisplayName="Anchor Base" sap:VirtualizedContainerService.HintSize="1591,260" sap2010:WorkflowViewState.IdRef="AnchorBase_2">
               <ui:AnchorBase.Action>
                 <ActivityAction x:TypeArguments="ui:Anchor">
                   <ActivityAction.Argument>
@@ -157,9 +203,9 @@
                   </ActivityAction.Argument>
                   <ui:GetOCRText WordsInfo="{x:Null}" DisplayName="Get OCR Text 'texto  ID01.png'" sap:VirtualizedContainerService.HintSize="334,168" sap2010:WorkflowViewState.IdRef="GetOCRText_2">
                     <ui:GetOCRText.OCREngine>
-                      <ActivityFunc x:TypeArguments="sd1:Image, scg:IEnumerable(scg:KeyValuePair(sd1:Rectangle, x:String))">
+                      <ActivityFunc x:TypeArguments="sd:Image, scg:IEnumerable(scg:KeyValuePair(sd:Rectangle, x:String))">
                         <ActivityFunc.Argument>
-                          <DelegateInArgument x:TypeArguments="sd1:Image" Name="Image" />
+                          <DelegateInArgument x:TypeArguments="sd:Image" Name="Image" />
                         </ActivityFunc.Argument>
                         <ui:GoogleOCR AllowedCharacters="{x:Null}" DeniedCharacters="{x:Null}" FilterRegion="{x:Null}" Invert="{x:Null}" Language="{x:Null}" Output="{x:Null}" Profile="{x:Null}" Scale="{x:Null}" Text="{x:Null}" ComputeSkewAngle="False" DisplayName="Tesseract OCR" ExtractWords="False" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="GoogleOCR_2" Image="[Image]" />
                       </ActivityFunc>
@@ -178,7 +224,7 @@
                       </ui:Target>
                     </ui:GetOCRText.Target>
                     <ui:GetOCRText.Text>
-                      <OutArgument x:TypeArguments="ui:GenericValue">[nomeCompleto]</OutArgument>
+                      <OutArgument x:TypeArguments="x:String">[nomeCompleto]</OutArgument>
                     </ui:GetOCRText.Text>
                   </ui:GetOCRText>
                 </ActivityAction>
@@ -186,7 +232,7 @@
               <ui:AnchorBase.AnchorProvider>
                 <ui:WaitUiElementAppear FoundElement="{x:Null}" WaitActive="{x:Null}" WaitVisible="{x:Null}" DisplayName="Find Element 'texto  ID01.png'" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="WaitUiElementAppear_2">
                   <ui:WaitUiElementAppear.Target>
-                    <ui:Target Element="{x:Null}" InformativeScreenshot="4d8a319209525cd367f47ee24bf578a6" Selector="&lt;wnd app='applicationframehost.exe' appid='Microsoft.Windows.Photos_8wekyb3d8bbwe!App' title='Fotos' /&gt;&lt;uia automationid='AutomationBackgroundControl' cls='Photos.Viewer.Controls.AccessibleContentControl' name='*' /&gt;">
+                    <ui:Target Element="{x:Null}" InformativeScreenshot="4d8a319209525cd367f47ee24bf578a6" Selector="&lt;wnd app='applicationframehost.exe' appid='Microsoft.Windows.Photos_8wekyb3d8bbwe!App' title='Fotos' /&gt;&lt;uia automationid='AutomationBackgroundControl' cls='Photos.Viewer.Controls.AccessibleContentControl' name='ID*.png' /&gt;">
                       <ui:Target.ClippingRegion>
                         <ui:Region Rectangle="488, 420, 105, 43" />
                       </ui:Target.ClippingRegion>
@@ -201,7 +247,7 @@
                 </ui:WaitUiElementAppear>
               </ui:AnchorBase.AnchorProvider>
             </ui:AnchorBase>
-            <ui:AnchorBase AnchorPosition="Auto" DisplayName="Anchor Base" sap:VirtualizedContainerService.HintSize="726,260" sap2010:WorkflowViewState.IdRef="AnchorBase_3">
+            <ui:AnchorBase AnchorPosition="Auto" DisplayName="Anchor Base" sap:VirtualizedContainerService.HintSize="1591,260" sap2010:WorkflowViewState.IdRef="AnchorBase_3">
               <ui:AnchorBase.Action>
                 <ActivityAction x:TypeArguments="ui:Anchor">
                   <ActivityAction.Argument>
@@ -209,9 +255,9 @@
                   </ActivityAction.Argument>
                   <ui:GetOCRText WordsInfo="{x:Null}" DisplayName="Get OCR Text 'texto  ID01.png'" sap:VirtualizedContainerService.HintSize="334,168" sap2010:WorkflowViewState.IdRef="GetOCRText_3">
                     <ui:GetOCRText.OCREngine>
-                      <ActivityFunc x:TypeArguments="sd1:Image, scg:IEnumerable(scg:KeyValuePair(sd1:Rectangle, x:String))">
+                      <ActivityFunc x:TypeArguments="sd:Image, scg:IEnumerable(scg:KeyValuePair(sd:Rectangle, x:String))">
                         <ActivityFunc.Argument>
-                          <DelegateInArgument x:TypeArguments="sd1:Image" Name="Image" />
+                          <DelegateInArgument x:TypeArguments="sd:Image" Name="Image" />
                         </ActivityFunc.Argument>
                         <ui:GoogleOCR AllowedCharacters="{x:Null}" DeniedCharacters="{x:Null}" FilterRegion="{x:Null}" Invert="{x:Null}" Language="{x:Null}" Output="{x:Null}" Profile="{x:Null}" Scale="{x:Null}" Text="{x:Null}" ComputeSkewAngle="False" DisplayName="Tesseract OCR" ExtractWords="False" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="GoogleOCR_3" Image="[Image]" />
                       </ActivityFunc>
@@ -230,7 +276,7 @@
                       </ui:Target>
                     </ui:GetOCRText.Target>
                     <ui:GetOCRText.Text>
-                      <OutArgument x:TypeArguments="ui:GenericValue">[dataNascimento]</OutArgument>
+                      <OutArgument x:TypeArguments="x:String">[dataNascimento]</OutArgument>
                     </ui:GetOCRText.Text>
                   </ui:GetOCRText>
                 </ActivityAction>
@@ -238,7 +284,7 @@
               <ui:AnchorBase.AnchorProvider>
                 <ui:WaitUiElementAppear FoundElement="{x:Null}" WaitActive="{x:Null}" WaitVisible="{x:Null}" DisplayName="Find Element 'texto  ID01.png'" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="WaitUiElementAppear_3">
                   <ui:WaitUiElementAppear.Target>
-                    <ui:Target Element="{x:Null}" InformativeScreenshot="2614773f7e22ff28726acd361ad4ca3a" Selector="&lt;wnd app='applicationframehost.exe' appid='Microsoft.Windows.Photos_8wekyb3d8bbwe!App' title='Fotos' /&gt;&lt;uia automationid='AutomationBackgroundControl' cls='Photos.Viewer.Controls.AccessibleContentControl' name='*' /&gt;">
+                    <ui:Target Element="{x:Null}" InformativeScreenshot="2614773f7e22ff28726acd361ad4ca3a" Selector="&lt;wnd app='applicationframehost.exe' appid='Microsoft.Windows.Photos_8wekyb3d8bbwe!App' title='Fotos' /&gt;&lt;uia automationid='AutomationBackgroundControl' cls='Photos.Viewer.Controls.AccessibleContentControl' name='ID*.png' /&gt;">
                       <ui:Target.ClippingRegion>
                         <ui:Region Rectangle="487, 464, 101, 38" />
                       </ui:Target.ClippingRegion>
@@ -253,24 +299,103 @@
                 </ui:WaitUiElementAppear>
               </ui:AnchorBase.AnchorProvider>
             </ui:AnchorBase>
-            <ui:GenerateDataTable ColumnSizes="{x:Null}" NewLineSeparator="{x:Null}" Positions="{x:Null}" ColumnSeparators="," DataTable="[datatable]" DisplayName="Gerar Tabela de Dados" sap:VirtualizedContainerService.HintSize="726,59" sap2010:WorkflowViewState.IdRef="GenerateDataTable_1" Input="[numeroID+&quot;,&quot;+nomeCompleto+&quot;,&quot;+dataNascimento]" />
-            <ui:ExcelApplicationScope Password="{x:Null}" DisplayName="Excel Application Scope" sap:VirtualizedContainerService.HintSize="726,288" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_1" WorkbookPath="ID\Registro.xlsx">
-              <ui:ExcelApplicationScope.Body>
-                <ActivityAction x:TypeArguments="ui:WorkbookApplication">
-                  <ActivityAction.Argument>
-                    <DelegateInArgument x:TypeArguments="ui:WorkbookApplication" Name="ExcelWorkbookScope" />
-                  </ActivityAction.Argument>
-                  <Sequence DisplayName="Fazer" sap:VirtualizedContainerService.HintSize="376,179" sap2010:WorkflowViewState.IdRef="Sequence_2">
-                    <sap:WorkflowViewStateService.ViewState>
-                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                      </scg:Dictionary>
-                    </sap:WorkflowViewStateService.ViewState>
-                    <ui:ExcelAppendRange DataTable="[datatable]" DisplayName="Append Range" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="ExcelAppendRange_1" SheetName="PESSOAL" />
-                  </Sequence>
-                </ActivityAction>
-              </ui:ExcelApplicationScope.Body>
-            </ui:ExcelApplicationScope>
+            <ui:GenerateDataTable ColumnSizes="{x:Null}" NewLineSeparator="{x:Null}" Positions="{x:Null}" ColumnSeparators="," DataTable="[datatable]" DisplayName="Gerar Tabela de Dados" sap:VirtualizedContainerService.HintSize="1591,59" sap2010:WorkflowViewState.IdRef="GenerateDataTable_1" Input="[numeroID+&quot;,&quot;+nomeCompleto+&quot;,&quot;+dataNascimento]" />
+            <If Condition="[identificacao.ToString = &quot;PESSOAL&quot;]" sap:VirtualizedContainerService.HintSize="1591,830" sap2010:WorkflowViewState.IdRef="If_3">
+              <If.Then>
+                <ui:ExcelApplicationScope Password="{x:Null}" DisplayName="Excel Application Scope" sap:VirtualizedContainerService.HintSize="452,380" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_1" WorkbookPath="ID\Registro.xlsx">
+                  <ui:ExcelApplicationScope.Body>
+                    <ActivityAction x:TypeArguments="ui:WorkbookApplication">
+                      <ActivityAction.Argument>
+                        <DelegateInArgument x:TypeArguments="ui:WorkbookApplication" Name="ExcelWorkbookScope" />
+                      </ActivityAction.Argument>
+                      <Sequence sap:VirtualizedContainerService.HintSize="418,271" sap2010:WorkflowViewState.IdRef="Sequence_4">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <Sequence DisplayName="Fazer" sap:VirtualizedContainerService.HintSize="376,179" sap2010:WorkflowViewState.IdRef="Sequence_2">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <ui:ExcelAppendRange DataTable="[datatable]" DisplayName="Append Range" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="ExcelAppendRange_1" SheetName="PESSOAL" />
+                        </Sequence>
+                      </Sequence>
+                    </ActivityAction>
+                  </ui:ExcelApplicationScope.Body>
+                </ui:ExcelApplicationScope>
+              </If.Then>
+              <If.Else>
+                <If Condition="[identificacao.ToString = &quot;ESTUDANTIL&quot;]" sap:VirtualizedContainerService.HintSize="1094,680" sap2010:WorkflowViewState.IdRef="If_2">
+                  <If.Then>
+                    <ui:ExcelApplicationScope Password="{x:Null}" DisplayName="Excel Application Scope" sap:VirtualizedContainerService.HintSize="452,380" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_2" WorkbookPath="ID\Registro.xlsx">
+                      <ui:ExcelApplicationScope.Body>
+                        <ActivityAction x:TypeArguments="ui:WorkbookApplication">
+                          <ActivityAction.Argument>
+                            <DelegateInArgument x:TypeArguments="ui:WorkbookApplication" Name="ExcelWorkbookScope" />
+                          </ActivityAction.Argument>
+                          <Sequence sap:VirtualizedContainerService.HintSize="418,271" sap2010:WorkflowViewState.IdRef="Sequence_6">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <Sequence DisplayName="Fazer" sap:VirtualizedContainerService.HintSize="376,179" sap2010:WorkflowViewState.IdRef="Sequence_5">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <ui:ExcelAppendRange DataTable="[datatable]" DisplayName="Append Range" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="ExcelAppendRange_2" SheetName="ESTUDANTIL" />
+                            </Sequence>
+                          </Sequence>
+                        </ActivityAction>
+                      </ui:ExcelApplicationScope.Body>
+                    </ui:ExcelApplicationScope>
+                  </If.Then>
+                  <If.Else>
+                    <If Condition="[identificacao.ToString = &quot;PROFISSIONAL&quot;]" sap:VirtualizedContainerService.HintSize="597,530" sap2010:WorkflowViewState.IdRef="If_1">
+                      <If.Then>
+                        <ui:ExcelApplicationScope Password="{x:Null}" DisplayName="Excel Application Scope" sap:VirtualizedContainerService.HintSize="452,380" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_3" WorkbookPath="ID\Registro.xlsx">
+                          <ui:ExcelApplicationScope.Body>
+                            <ActivityAction x:TypeArguments="ui:WorkbookApplication">
+                              <ActivityAction.Argument>
+                                <DelegateInArgument x:TypeArguments="ui:WorkbookApplication" Name="ExcelWorkbookScope" />
+                              </ActivityAction.Argument>
+                              <Sequence sap:VirtualizedContainerService.HintSize="418,271" sap2010:WorkflowViewState.IdRef="Sequence_8">
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                                <Sequence DisplayName="Fazer" sap:VirtualizedContainerService.HintSize="376,179" sap2010:WorkflowViewState.IdRef="Sequence_7">
+                                  <sap:WorkflowViewStateService.ViewState>
+                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                    </scg:Dictionary>
+                                  </sap:WorkflowViewStateService.ViewState>
+                                  <ui:ExcelAppendRange DataTable="[datatable]" DisplayName="Append Range" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="ExcelAppendRange_3" SheetName="PROFISSIONAL" />
+                                </Sequence>
+                              </Sequence>
+                            </ActivityAction>
+                          </ui:ExcelApplicationScope.Body>
+                        </ui:ExcelApplicationScope>
+                      </If.Then>
+                    </If>
+                  </If.Else>
+                </If>
+              </If.Else>
+            </If>
+            <Assign sap:VirtualizedContainerService.HintSize="1591,60" sap2010:WorkflowViewState.IdRef="Assign_2">
+              <Assign.To>
+                <OutArgument x:TypeArguments="sd1:Process">[process]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="sd1:Process">[Process.Start(pegarImagens.ToString)]</InArgument>
+              </Assign.Value>
+            </Assign>
           </Sequence>
         </ActivityAction>
       </ui:ForEach.Body>
